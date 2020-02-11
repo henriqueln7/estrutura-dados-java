@@ -267,4 +267,27 @@ class DynamicArrayTest {
         assertEquals(0, list.removeAt(1));
         assertEquals(-1, list.removeAt(42422));
     }
+
+    @Test
+    void testResize() {
+        list = new DynamicArray(2);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(1);
+        list.add(4);
+
+        assertEquals(5, list.size());
+    }
+
+    @Test
+    void testToString() {
+        list = new DynamicArray();
+        assertEquals("[]", list.toString());
+
+        list.add(1);
+        list.add(2);
+
+        assertEquals("[1,2]", list.toString());
+    }
 }
