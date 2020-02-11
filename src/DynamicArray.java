@@ -11,48 +11,42 @@ public class DynamicArray implements List {
     }
 
     public DynamicArray(int len) {
+        if(len <= 0) {
+            throw new IllegalArgumentException("O tamanho do array deve ser maior que 0.");
+        }
         this.array = new int[len];
         this.len = 0;
     }
 
     @Override
     public int get(int index) {
+        if(index < 0 || index > this.len) {
+            throw new IndexOutOfBoundsException("Index out of bounds!");
+        }
         return this.array[index];
     }
 
     @Override
-    public void add(int element, int index) {
-        if(this.len + 1 >= this.array.length) {
-            int[] newArray = new int[this.array.length * 2];
-            for(int i = 0; i < this.array.length; i++) {
-                newArray[i] = this.array[i];
-            }
-            this.array = newArray;
-        }
+    public void add(int element) {
+        checkResize(this.len + 1);
 
-        // Shift pra direita
-        for(int i = this.len; i > index; i--) {
-            this.array[i] = this.array[i - 1];
-        }
+        this.array[len++] = element;
+    }
+    @Override
+    public void add(int element, int index) {
+        checkResize(this.len + 1);
+
+        shiftRigth(index);
+
         this.array[index] = element;
         this.len++;
     }
 
     @Override
-    public void add(int element) {
-        if(this.len + 1 >= this.array.length) {
-            int[] newArray = new int[this.array.length * 2];
-            for(int i = 0; i < this.array.length; i++) {
-                newArray[i] = this.array[i];
-            }
-            this.array = newArray;
-        }
-        this.array[len++] = element;
-
-    }
-
-    @Override
     public void set(int element, int index) {
+        if(index < 0 || index > this.len) {
+            throw new IndexOutOfBoundsException("Index out of bounds!");
+        }
         this.array[index] = element;
     }
 
@@ -94,9 +88,7 @@ public class DynamicArray implements List {
     public int remove(int index) {
         int element = this.array[index];
 
-        for(int i = index; i < this.len - 1; i++) {
-            this.array[i] = this.array[i + 1];
-        }
+        shiftLeft(index);
 
         this.len--;
         return element;
@@ -110,5 +102,36 @@ public class DynamicArray implements List {
             return index;
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(this.array);
+    }
+
+    private void shiftRigth(int index) {
+        for(int i = this.len; i > index; i--) {
+            this.array[i] = this.array[i - 1];
+        }
+    }
+
+    private void shiftLeft(int index) {
+        for(int i = index; i < this.len; i++) {
+            this.array[i] = this.array[i + 1];
+        }
+    }
+
+    private void checkResize(int capacity) {
+        if(capacity >= this.len) {
+            resize();
+        }
+    }
+
+    private void resize() {
+        int[] newArray = new int[this.array.length * 2];
+        for(int i = 0; i < this.array.length; i++) {
+            newArray[i] = this.array[i];
+        }
+        this.array = newArray;
     }
 }

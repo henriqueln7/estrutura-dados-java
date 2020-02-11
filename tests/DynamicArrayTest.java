@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DynamicArrayTest {
@@ -9,9 +10,20 @@ class DynamicArrayTest {
 
     @Test
     void construtorNaoVazio() {
-        list = new DynamicArray(0);
+        list = new DynamicArray(10);
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
+    }
+
+    @Test
+    void construtorInvalido() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            list = new DynamicArray(-1);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            list = new DynamicArray(0);
+        });
     }
 
     @Test
@@ -24,6 +36,22 @@ class DynamicArrayTest {
     }
 
     @Test
+    void getPosicaoInvalida() {
+        list = new DynamicArray();
+
+        list.add(1);
+        list.add(2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.get(-1);
+        });
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.get(5);
+        });
+    }
+
+    @Test
     void clearArray() {
         list = new DynamicArray();
         list.add(1);
@@ -32,7 +60,6 @@ class DynamicArrayTest {
 
         list.clear();
         assertEquals(0, list.size());
-        assertEquals(-1, list.get(2));
     }
 
     @Test
@@ -51,7 +78,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void testAddComIndex() {
+    void testAddComIndexInicio() {
         list = new DynamicArray();
 
         list.add(1);
@@ -60,10 +87,47 @@ class DynamicArrayTest {
         list.add(4, 2);
 
         assertEquals(3, list.get(0));
-        assertEquals(4, list.get(2));
-        assertEquals(4, list.size());
     }
 
+    @Test
+    void testAddComIndexMeio() {
+        list = new DynamicArray();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(3, 2);
+
+        assertEquals(3, list.get(2));
+    }
+
+    @Test
+    void testAddComIndexFinal() {
+        list = new DynamicArray();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4, 0);
+
+        assertEquals(4, list.get(0));
+    }
+
+    @Test
+    void testAddIndexInvalido() {
+        list = new DynamicArray();
+        list.add(1);
+        list.add(2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.get(-1);
+        });
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.get(3);
+        });
+    }
     @Test
     void indexOf() {
         list = new DynamicArray();
@@ -100,6 +164,21 @@ class DynamicArrayTest {
 
         assertEquals(4, list.get(0));
         assertEquals(2, list.size());
+    }
+
+    @Test
+    void setIndexInvalido() {
+        list = new DynamicArray();
+        list.add(1);
+        list.add(2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+           list.set(3, -1);
+        });
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.set(4, 4);
+        });
     }
 
     @Test
@@ -152,6 +231,17 @@ class DynamicArrayTest {
     }
 
     @Test
+    void removeIndexInvalido() {
+        list = new DynamicArray();
+        list.add(1);
+        list.add(2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.remove(-1);
+        });
+    }
+
+    @Test
     void removeAt() {
         list = new DynamicArray();
 
@@ -159,12 +249,22 @@ class DynamicArrayTest {
         list.add(1000);
         list.add(4242);
 
-        list.removeAt(1000);
+        assertEquals(1 ,list.removeAt(1000));
 
         assertEquals(4242, list.get(1));
         assertEquals(2, list.size());
 
         list.removeAt(1);
         assertEquals(4242, list.get(0));
+    }
+
+    @Test
+    void removeAtElementoInexistente() {
+        list = new DynamicArray();
+        list.add(1);
+        list.add(22121);
+
+        assertEquals(0, list.removeAt(1));
+        assertEquals(-1, list.removeAt(42422));
     }
 }
