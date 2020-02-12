@@ -71,6 +71,10 @@ class LinkedListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             list.add(2, 5);
         });
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.add(2, 3);
+        });
     }
 
     @Test
@@ -114,7 +118,7 @@ class LinkedListTest {
         list.add(2);
 
         assertThrows(IndexOutOfBoundsException.class, () -> {
-           list.set(3, 2);
+           list.set(3, 1);
         });
 
         assertThrows(IndexOutOfBoundsException.class, () -> {
@@ -218,18 +222,18 @@ class LinkedListTest {
         list = new LinkedList();
 
         assertThrows(NoSuchElementException.class, () -> {
-            list.removeAt(0);
+            list.remove(0);
         });
     }
 
     @Test
     void addFirst() {
         list = new LinkedList();
-        list.add(2);
-        list.add(3);
         list.addFirst(5);
-
         assertEquals(5, list.get(0));
+
+        list.addFirst(10);
+        assertEquals(10, list.getFirst());
     }
 
     @Test

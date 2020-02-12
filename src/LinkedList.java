@@ -10,9 +10,7 @@ public class LinkedList implements List  {
 
     @Override
     public int get(int index) {
-        if(index < 0 || index > this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkIndexClose(index);
 
         if(index == 0) {
             return this.getFirst();
@@ -21,12 +19,12 @@ public class LinkedList implements List  {
             return this.getLast();
         }
 
-        Node aux = this.head;
+        Node current = this.head;
         for(int i = 0; i < index; i++) {
-            aux = aux.next;
+            current = current.next;
         }
 
-        return aux.value;
+        return current.value;
     }
 
     @Override
@@ -36,9 +34,7 @@ public class LinkedList implements List  {
 
     @Override
     public void add(int element, int index) {
-        if(index < 0 || index > this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkIndexOpen(index);
 
         Node newNode = new Node(element);
 
@@ -47,12 +43,12 @@ public class LinkedList implements List  {
         } else if(index == this.size()) {
             addLast(element);
         } else {
-            Node aux = this.head;
+            Node current = this.head;
             for (int i = 0; i < index - 1; i++) {
-                aux = aux.next; // Apontando para o elemento anterior
+                current = current.next; // Apontando para o elemento anterior
             }
-            Node temp = aux.next;
-            aux.next = newNode;
+            Node temp = current.next;
+            current.next = newNode;
             newNode.next = temp;
         }
     }
@@ -63,12 +59,12 @@ public class LinkedList implements List  {
     }
 
     @Override
-    public int indexOf(int element) {
+    public int indexOf(int value) {
         int index = 0;
         Node current = this.head;
 
         while(current != null) {
-            if(current.value == element) {
+            if(current.value == value) {
                 return index;
             }
             index += 1;
@@ -83,40 +79,30 @@ public class LinkedList implements List  {
     }
 
     @Override
-    public void set(int element, int index) {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
+    public void set(int value, int index) {
+        checkEmpty();
 
-        if(index < 0 || index >= this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkIndexClose(index);
 
         if(index == 0) {
-            this.head.value = element;
+            this.head.value = value;
         } else {
             Node current = this.head;
             for(int i = 0; i < index; i++) {
                 current = current.next;
             }
-            current.value = element;
+            current.value = value;
         }
     }
 
     @Override
     public int size() {
-        if(this.head == null) {
-            return 0;
-        }
-        if(this.head.next == null) {
-            return 1;
-        }
+        int size = 0;
+        Node current = this.head;
 
-        int size = 1;
-        Node aux = this.head;
-        while(aux.next != null) {
-            size++;
-            aux = aux.next;
+        while(current != null) {
+            size += 1;
+            current = current.next;
         }
 
         return size;
@@ -129,37 +115,30 @@ public class LinkedList implements List  {
 
     @Override
     public int remove(int index) {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-
-        if(index < 0 || index >= this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkEmpty();
+        checkIndexClose(index);
 
         if(index == 0) {
             return removeFirst();
         } else if(index == this.size() - 1) {
             return removeLast();
         } else {
-            Node aux = this.head;
+            Node current = this.head;
             for (int i = 0; i < index - 1 ; i++) {
-                aux = aux.next;
+                current = current.next;
             }
-            Node temp = aux.next;
-            aux.next = aux.next.next;
+            Node temp = current.next;
+            current.next = current.next.next;
             temp.next = null;
             return temp.value;
         }
     }
 
     @Override
-    public int removeAt(int element) {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
+    public int removeAt(int value) {
+        checkEmpty();
 
-        int index = this.indexOf(element);
+        int index = this.indexOf(value);
 
         if(index == -1) {
             return -1;
@@ -169,8 +148,8 @@ public class LinkedList implements List  {
         return index;
     }
 
-    public void addFirst(int element) {
-        Node newNode = new Node(element);
+    public void addFirst(int value) {
+        Node newNode = new Node(value);
 
         if(this.isEmpty()) {
             this.head = newNode;
@@ -180,73 +159,81 @@ public class LinkedList implements List  {
         }
     }
 
-    public void addLast(int element) {
-        Node newNode = new Node(element);
+    public void addLast(int value) {
+        Node newNode = new Node(value);
 
         if(this.isEmpty()) {
-            this.head = newNode;
+            addFirst(value);
         } else {
-            Node aux = this.head;
-            while(aux.next != null) {
-                aux = aux.next;
+            Node current = this.head;
+            while(current.next != null) {
+                current = current.next;
             }
-            aux.next = newNode;
+            current.next = newNode;
         }
     }
 
     public int getFirst() {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
+        checkEmpty();
 
         return this.head.value;
     }
 
     public int getLast() {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
+        checkEmpty();
+
+        Node current = this.head;
+        while(current.next != null) {
+            current = current.next;
         }
 
-        Node node = this.head;
-        while(node.next != null) {
-            node = node.next;
-        }
-
-        return node.value;
+        return current.value;
     }
 
     public int removeFirst() {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
+        checkEmpty();
+
         int headValue = this.head.value;
-        if(this.head.next == null) {
-            this.head = null;
-        } else {
-            this.head = this.head.next;
-        }
+        this.head = this.head.next;
 
         return headValue;
     }
 
     public int removeLast() {
-        if(this.isEmpty()) {
-            throw new NoSuchElementException();
-        }
+        checkEmpty();
+
 
         if(this.head.next == null) {
             this.head = null;
         } else {
-            Node aux = this.head;
-            while(aux.next.next != null) {
-                aux = aux.next;
+            Node current = this.head;
+            while(current.next.next != null) {
+                current = current.next;
             }
-            int temp = aux.next.value;
-            aux.next = null;
+            int temp = current.next.value;
+            current.next = null;
             return temp;
         }
 
         return -1;
+    }
+
+    private void checkEmpty() {
+        if(this.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+    }
+
+    private void checkIndexOpen(int index) {
+        if(index < 0 || index > this.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private void checkIndexClose(int index) {
+        if(index < 0 || index >= this.size()) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 }
 
