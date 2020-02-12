@@ -106,7 +106,19 @@ public class DynamicArray implements List {
 
     @Override
     public String toString() {
-        return Arrays.toString(this.array);
+        if(this.isEmpty()) {
+            return "[]";
+        }
+
+        StringBuffer sb = new StringBuffer("[");
+
+        for(int  i = 0; i < this.len; i++) {
+            sb.append(this.array[i] + ",");
+        }
+
+        sb.replace(sb.length() - 1, sb.length(), "]");
+
+        return sb.toString();
     }
 
     private void shiftRigth(int index) {
