@@ -84,12 +84,12 @@ public class LinkedList implements List  {
 
     @Override
     public void set(int element, int index) {
-        if(index < 0 || index >= this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
-
         if(this.isEmpty()) {
             throw new NoSuchElementException();
+        }
+
+        if(index < 0 || index >= this.size()) {
+            throw new IndexOutOfBoundsException();
         }
 
         if(index == 0) {
@@ -129,6 +129,10 @@ public class LinkedList implements List  {
 
     @Override
     public int remove(int index) {
+        if(this.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
         if(index < 0 || index >= this.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -151,6 +155,10 @@ public class LinkedList implements List  {
 
     @Override
     public int removeAt(int element) {
+        if(this.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
         int index = this.indexOf(element);
 
         if(index == -1) {
