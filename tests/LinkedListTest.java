@@ -15,11 +15,11 @@ class LinkedListTest {
 
         list.add(1);
         list.add(3);
-        list.add(2, 1);
+        list.add(4);
 
         assertEquals(1, list.get(0));
-        assertEquals(2, list.get(1));
-        assertEquals(3, list.get(2));
+        assertEquals(3, list.get(1));
+        assertEquals(4, list.get(2));
     }
 
     @Test
@@ -43,20 +43,6 @@ class LinkedListTest {
         assertEquals(2, list.get(1));
     }
 
-    @Test
-    void addIndexInvalido() {
-        list = new LinkedList();
-        list.add(3);
-        list.add(4);
-
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-           list.add(-1);
-        });
-
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            list.add(5);
-        });
-    }
 
     @Test
     void addIndex() {
@@ -92,9 +78,14 @@ class LinkedListTest {
         list = new LinkedList();
         list.add(1);
         list.add(2);
-
+        list.add(3);
+        list.add(4);
         assertEquals(0, list.indexOf(1));
-        assertEquals(-1, list.indexOf(3));
+        assertEquals(-1, list.indexOf(7));
+        assertEquals(-1, list.indexOf(5));
+        assertEquals(3, list.indexOf(4));
+        assertEquals(2, list.indexOf(3));
+        assertEquals(1, list.indexOf(2));
     }
 
     @Test
@@ -115,6 +106,29 @@ class LinkedListTest {
 
         list.set(100, 0);
         assertEquals(100, list.get(0));
+    }
+
+    @Test
+    void setIndexInvalido() {
+        list = new LinkedList();
+        list.add(2);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+           list.set(3, 2);
+        });
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            list.set(3, -1);
+        });
+    }
+
+    @Test
+    void setListaVazia() {
+        list = new LinkedList();
+
+        assertThrows(NoSuchElementException.class, () -> {
+           list.set(1, 0);
+        });
     }
 
     @Test
@@ -152,14 +166,14 @@ class LinkedListTest {
         list.add(2);
         list.add(3);
         list.add(4);
-
+        //[1, 2, 3, 4]
         list.remove(0);
         assertEquals(2, list.get(0));
         assertEquals(3, list.size());
-
+        //[2, 3, 4]
         list.remove(1);
-
-        assertEquals(3, list.get(1));
+        //[2, 4]
+        assertEquals(4, list.get(1));
         assertEquals(2, list.size());
     }
 
@@ -179,6 +193,15 @@ class LinkedListTest {
     }
 
     @Test
+    void removeListaVazia() {
+        list = new LinkedList();
+
+        assertThrows(NoSuchElementException.class, () -> {
+            list.remove(0);
+        });
+    }
+
+    @Test
     void removeAt() {
         list = new LinkedList();
         list.add(1);
@@ -187,6 +210,16 @@ class LinkedListTest {
 
         assertEquals(1, list.removeAt(2));
         assertEquals(2, list.size());
+        assertEquals(-1, list.removeAt(10));
+    }
+
+    @Test
+    void removeAtListaVazia() {
+        list = new LinkedList();
+
+        assertThrows(NoSuchElementException.class, () -> {
+            list.removeAt(0);
+        });
     }
 
     @Test
