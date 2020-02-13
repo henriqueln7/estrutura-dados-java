@@ -20,7 +20,7 @@ public class DynamicArray implements List {
 
     @Override
     public int get(int index) {
-        if(index < 0 || index > this.len) {
+        if(index < 0 || index >= this.len) {
             throw new IndexOutOfBoundsException("Index out of bounds!");
         }
         return this.array[index];
@@ -44,7 +44,7 @@ public class DynamicArray implements List {
 
     @Override
     public void set(int element, int index) {
-        if(index < 0 || index > this.len) {
+        if(index < 0 || index >= this.len) {
             throw new IndexOutOfBoundsException("Index out of bounds!");
         }
         this.array[index] = element;
@@ -86,6 +86,9 @@ public class DynamicArray implements List {
 
     @Override
     public int remove(int index) {
+        if(index < 0 || index >= this.len) {
+            throw new IndexOutOfBoundsException();
+        }
         int element = this.array[index];
 
         shiftLeft(index);

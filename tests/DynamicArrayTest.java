@@ -47,7 +47,7 @@ class DynamicArrayTest {
         });
 
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            list.get(5);
+            list.get(2);
         });
     }
 
@@ -225,8 +225,7 @@ class DynamicArrayTest {
         assertEquals(42, list.get(0));
         assertEquals(1, list.size());
 
-        list.remove(1);
-        System.out.println(list.get(0));
+        list.remove(0);
         assertEquals(0, list.size());
     }
 
