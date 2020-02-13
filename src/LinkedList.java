@@ -192,14 +192,9 @@ public class LinkedList implements List  {
 
     public int removeFirst() {
         checkEmpty();
+
         int headValue = this.head.value;
-
-        if(this.head.next == null) {
-            this.head = null;
-        } else {
-            this.head = this.head.next;
-        }
-
+        this.head = this.head.next;
 
         return headValue;
     }
