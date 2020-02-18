@@ -1,16 +1,17 @@
-import org.junit.jupiter.api.BeforeEach;
+package arraylist;
+
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DynamicArrayTest {
+class ArrayListTest {
 
-    private DynamicArray list;
+    private ArrayList list;
 
     @Test
     void construtorNaoVazio() {
-        list = new DynamicArray(10);
+        list = new ArrayList(10);
         assertEquals(0, list.size());
         assertTrue(list.isEmpty());
     }
@@ -18,17 +19,17 @@ class DynamicArrayTest {
     @Test
     void construtorInvalido() {
         assertThrows(IllegalArgumentException.class, () -> {
-            list = new DynamicArray(-1);
+            list = new ArrayList(-1);
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            list = new DynamicArray(0);
+            list = new ArrayList(0);
         });
     }
 
     @Test
     void get() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(2);
 
@@ -37,7 +38,7 @@ class DynamicArrayTest {
 
     @Test
     void getPosicaoInvalida() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(2);
@@ -53,7 +54,7 @@ class DynamicArrayTest {
 
     @Test
     void clearArray() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -64,7 +65,7 @@ class DynamicArrayTest {
 
     @Test
     void addSemIndex() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(1);
@@ -79,7 +80,7 @@ class DynamicArrayTest {
 
     @Test
     void testAddComIndexInicio() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(2);
@@ -91,7 +92,7 @@ class DynamicArrayTest {
 
     @Test
     void testAddComIndexMeio() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(2);
@@ -104,7 +105,7 @@ class DynamicArrayTest {
 
     @Test
     void testAddComIndexFinal() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(2);
@@ -116,7 +117,7 @@ class DynamicArrayTest {
 
     @Test
     void testAddIndexInvalido() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(2);
 
@@ -130,7 +131,7 @@ class DynamicArrayTest {
     }
     @Test
     void indexOf() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(2);
         list.add(4);
@@ -142,7 +143,7 @@ class DynamicArrayTest {
 
     @Test
     void contains() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(32);
@@ -155,7 +156,7 @@ class DynamicArrayTest {
 
     @Test
     void set() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(2);
@@ -168,7 +169,7 @@ class DynamicArrayTest {
 
     @Test
     void setIndexInvalido() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(2);
 
@@ -183,7 +184,7 @@ class DynamicArrayTest {
 
     @Test
     void size() {
-        list = new DynamicArray();
+        list = new ArrayList();
         assertEquals(0, list.size());
 
         list.add(1);
@@ -201,7 +202,7 @@ class DynamicArrayTest {
 
     @Test
     void isEmpty() {
-        list = new DynamicArray();
+        list = new ArrayList();
         assertTrue(list.isEmpty());
 
         list.add(211);
@@ -215,7 +216,7 @@ class DynamicArrayTest {
 
     @Test
     void remove() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(21);
         list.add(42);
@@ -231,7 +232,7 @@ class DynamicArrayTest {
 
     @Test
     void removeIndexInvalido() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(2);
 
@@ -242,7 +243,7 @@ class DynamicArrayTest {
 
     @Test
     void removeAt() {
-        list = new DynamicArray();
+        list = new ArrayList();
 
         list.add(1);
         list.add(1000);
@@ -259,7 +260,7 @@ class DynamicArrayTest {
 
     @Test
     void removeAtElementoInexistente() {
-        list = new DynamicArray();
+        list = new ArrayList();
         list.add(1);
         list.add(22121);
 
@@ -269,7 +270,7 @@ class DynamicArrayTest {
 
     @Test
     void testResize() {
-        list = new DynamicArray(2);
+        list = new ArrayList(2);
         list.add(1);
         list.add(2);
         list.add(3);
@@ -281,7 +282,7 @@ class DynamicArrayTest {
 
     @Test
     void testToString() {
-        list = new DynamicArray();
+        list = new ArrayList();
         assertEquals("[]", list.toString());
 
         list.add(1);

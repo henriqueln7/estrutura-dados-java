@@ -1,6 +1,8 @@
+package linkedlist;
+
 import java.util.NoSuchElementException;
 
-public class LinkedList implements List  {
+public class LinkedList {
 
     private Node head;
 
@@ -8,7 +10,6 @@ public class LinkedList implements List  {
         this.head = null;
     }
 
-    @Override
     public int get(int index) {
         checkIndexClose(index);
 
@@ -27,12 +28,10 @@ public class LinkedList implements List  {
         return current.value;
     }
 
-    @Override
     public void clear() {
         this.head = null;
     }
 
-    @Override
     public void add(int element, int index) {
         checkIndexOpen(index);
 
@@ -53,12 +52,10 @@ public class LinkedList implements List  {
         }
     }
 
-    @Override
     public void add(int element) {
         addLast(element);
     }
 
-    @Override
     public int indexOf(int value) {
         int index = 0;
         Node current = this.head;
@@ -73,12 +70,10 @@ public class LinkedList implements List  {
         return -1;
     }
 
-    @Override
     public boolean contains(int element) {
         return this.indexOf(element) != -1;
     }
 
-    @Override
     public void set(int value, int index) {
         checkEmpty();
 
@@ -95,7 +90,6 @@ public class LinkedList implements List  {
         }
     }
 
-    @Override
     public int size() {
         int size = 0;
         Node current = this.head;
@@ -108,12 +102,10 @@ public class LinkedList implements List  {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         return this.size() == 0;
     }
 
-    @Override
     public int remove(int index) {
         checkEmpty();
         checkIndexClose(index);
@@ -134,7 +126,6 @@ public class LinkedList implements List  {
         }
     }
 
-    @Override
     public int removeAt(int value) {
         checkEmpty();
 

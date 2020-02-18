@@ -1,3 +1,7 @@
+package stack;
+
+import linkedlist.LinkedList;
+
 import java.util.EmptyStackException;
 
 public class Stack {

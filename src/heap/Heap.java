@@ -1,3 +1,5 @@
+package heap;
+
 import java.util.Arrays;
 
 public class Heap {
@@ -33,7 +35,7 @@ public class Heap {
 
     public int remove() {
         if(isEmpty()) {
-            throw new RuntimeException("Heap is empty");
+            throw new RuntimeException("heap.Heap is empty");
         }
 
         int element = this.heap[0];

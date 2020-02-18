@@ -1,3 +1,6 @@
+package queue;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,11 +13,11 @@ class QueueTest {
         queue = new Queue();
         queue.enqueue(1);
 
-        assertEquals(1, queue.peek());
+        Assertions.assertEquals(1, queue.peek());
 
         queue.enqueue(2);
 
-        assertEquals(2, queue.size());
+        Assertions.assertEquals(2, queue.size());
     }
 
     @Test
@@ -24,12 +27,12 @@ class QueueTest {
         queue.enqueue(2);
         queue.enqueue(3);
 
-        assertEquals(1, queue.dequeue());
-        assertEquals(2, queue.size());
+        Assertions.assertEquals(1, queue.dequeue());
+        Assertions.assertEquals(2, queue.size());
 
-        assertEquals(2, queue.peek());
-        assertEquals(2, queue.dequeue());
-        assertEquals(1, queue.size());
+        Assertions.assertEquals(2, queue.peek());
+        Assertions.assertEquals(2, queue.dequeue());
+        Assertions.assertEquals(1, queue.size());
     }
 
     @Test
@@ -46,12 +49,12 @@ class QueueTest {
         queue = new Queue();
         queue.enqueue(1);
 
-        assertEquals(1, queue.peek());
+        Assertions.assertEquals(1, queue.peek());
 
         queue.enqueue(2);
 
-        assertEquals(1, queue.peek());
-        assertEquals(2, queue.size());
+        Assertions.assertEquals(1, queue.peek());
+        Assertions.assertEquals(2, queue.size());
     }
 
     @Test
@@ -69,9 +72,9 @@ class QueueTest {
         queue.enqueue(1);
         queue.enqueue(10);
 
-        assertTrue(queue.contains(1));
-        assertTrue(queue.contains(10));
-        assertFalse(queue.contains(3));
+        Assertions.assertTrue(queue.contains(1));
+        Assertions.assertTrue(queue.contains(10));
+        Assertions.assertFalse(queue.contains(3));
     }
 
 

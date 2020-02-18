@@ -1,16 +1,16 @@
-import java.util.Arrays;
+package arraylist;
 
-public class DynamicArray implements List {
+public class ArrayList {
 
     private int[] array;
     private int len;
 
 
-    public DynamicArray() {
+    public ArrayList() {
         this(16);
     }
 
-    public DynamicArray(int len) {
+    public ArrayList(int len) {
         if(len <= 0) {
             throw new IllegalArgumentException("O tamanho do array deve ser maior que 0.");
         }
@@ -18,7 +18,6 @@ public class DynamicArray implements List {
         this.len = 0;
     }
 
-    @Override
     public int get(int index) {
         if(index < 0 || index >= this.len) {
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -26,13 +25,12 @@ public class DynamicArray implements List {
         return this.array[index];
     }
 
-    @Override
     public void add(int element) {
         checkResize(this.len + 1);
 
         this.array[len++] = element;
     }
-    @Override
+
     public void add(int element, int index) {
         checkResize(this.len + 1);
 
@@ -42,7 +40,6 @@ public class DynamicArray implements List {
         this.len++;
     }
 
-    @Override
     public void set(int element, int index) {
         if(index < 0 || index >= this.len) {
             throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -50,8 +47,6 @@ public class DynamicArray implements List {
         this.array[index] = element;
     }
 
-
-    @Override
     public void clear() {
         for(int i = 0; i < this.len; i++) {
             this.array[i] = -1;
@@ -59,7 +54,6 @@ public class DynamicArray implements List {
         this.len = 0;
     }
 
-    @Override
     public int indexOf(int element) {
         for(int i = 0; i < this.len; i++) {
             if(this.array[i] == element) {
@@ -69,22 +63,18 @@ public class DynamicArray implements List {
         return -1;
     }
 
-    @Override
     public boolean contains(int element) {
         return this.indexOf(element) != -1;
     }
 
-    @Override
     public int size() {
         return this.len;
     }
 
-    @Override
     public boolean isEmpty() {
         return this.size() == 0;
     }
 
-    @Override
     public int remove(int index) {
         if(index < 0 || index >= this.len) {
             throw new IndexOutOfBoundsException();
@@ -97,7 +87,6 @@ public class DynamicArray implements List {
         return element;
     }
 
-    @Override
     public int removeAt(int element) {
         int index = this.indexOf(element);
         if(index != -1) {

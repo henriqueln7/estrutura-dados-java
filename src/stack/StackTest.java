@@ -1,3 +1,6 @@
+package stack;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.EmptyStackException;
@@ -13,9 +16,9 @@ class StackTest {
         s = new Stack();
         s.push(3);
 
-        assertEquals(3, s.peek());
+        Assertions.assertEquals(3, s.peek());
         s.push(2);
-        assertEquals(2, s.peek());
+        Assertions.assertEquals(2, s.peek());
     }
 
     @Test
@@ -23,13 +26,13 @@ class StackTest {
         s = new Stack();
         s.push(3);
 
-        assertEquals(3, s.pop());
-        assertEquals(0, s.size());
+        Assertions.assertEquals(3, s.pop());
+        Assertions.assertEquals(0, s.size());
 
         s.push(1);
         s.push(2);
 
-        assertEquals(2, s.pop());
+        Assertions.assertEquals(2, s.pop());
     }
 
     @Test
@@ -46,9 +49,9 @@ class StackTest {
         s = new Stack();
 
         s.push(1);
-        assertEquals(1, s.peek());
+        Assertions.assertEquals(1, s.peek());
         s.push(5);
-        assertEquals(5, s.peek());
+        Assertions.assertEquals(5, s.peek());
     }
 
     @Test
@@ -64,22 +67,22 @@ class StackTest {
     void size() {
         s = new Stack();
 
-        assertEquals(0, s.size());
+        Assertions.assertEquals(0, s.size());
         s.push(3);
         s.push(2);
         s.push(1);
 
-        assertEquals(3, s.size());
+        Assertions.assertEquals(3, s.size());
     }
 
     @Test
     void isEmpty() {
         s = new Stack();
-        assertTrue(s.isEmpty());
+        Assertions.assertTrue(s.isEmpty());
         s.push(1);
-        assertFalse(s.isEmpty());
+        Assertions.assertFalse(s.isEmpty());
         s.pop();
-        assertTrue(s.isEmpty());
+        Assertions.assertTrue(s.isEmpty());
     }
 
 

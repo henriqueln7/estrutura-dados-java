@@ -1,3 +1,7 @@
+package queue;
+
+import doublylinkedlist.DoublyLinkedList;
+
 public class Queue {
 
     DoublyLinkedList list;
@@ -17,7 +21,7 @@ public class Queue {
 
     public int dequeue() {
         if(this.isEmpty()) {
-            throw new RuntimeException("Queue empty!");
+            throw new RuntimeException("queue.Queue empty!");
         }
 
         return this.list.removeFirst();
@@ -25,7 +29,7 @@ public class Queue {
 
     public int peek() {
         if(this.isEmpty()) {
-            throw new RuntimeException("Queue empty!");
+            throw new RuntimeException("queue.Queue empty!");
         }
 
         return this.list.getFirst();
