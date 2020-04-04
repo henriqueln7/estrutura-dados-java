@@ -15,7 +15,10 @@ public class QuickSort {
     }
 
     public int partition(int[] array, int left, int right) {
-        // alterar o modo de pegar o pivot
+
+        int random_index = left + (int)(Math.random() * (right - left + 1));
+        swap(array, left, random_index);
+
         int pivot = array[left];
         int i = left;
 
