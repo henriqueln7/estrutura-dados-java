@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuickSortTest {
-    private QuickSort quickSort;
+    private QuickSort3Way quickSort;
 
     @BeforeEach
     void setUp() {
-        quickSort = new QuickSort();
+        quickSort = new QuickSort3Way();
     }
 
     @Test
@@ -74,5 +74,14 @@ class QuickSortTest {
 
         quickSort.sort(arr);
         assertArrayEquals(expectedArr, arr);
+    }
+
+    @Test
+    void sortArrayRepetedElements() {
+        int[] arr = {4, 0, 3, 7, 7, 1, 2, 2, 4, 8, 0, 8, 8, 3, 7, 1, 7};
+        int[] expectedArr = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 7, 7, 7, 7, 8, 8, 8};
+
+        quickSort.sort(arr);
+        assertArrayEquals(arr, expectedArr);
     }
 }
